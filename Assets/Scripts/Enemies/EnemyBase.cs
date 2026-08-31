@@ -1,8 +1,12 @@
 using UnityEngine;
+using UnityEngine.AI;
 
-public class EnemyType1 : MonoBehaviour
+[RequireComponent(typeof(NavMeshAgent))]
+public abstract class EnemyBase : MonoBehaviour
 {
-
+    CoinManager coinManager;
+    
+    [Header("Enemy Stats")]
     public float speed = 3f;
     public float EnemyMaxHealth = 100f;
     public float EnemyCurrentHealth;
@@ -11,7 +15,7 @@ public class EnemyType1 : MonoBehaviour
     public Transform[] waypoints; //waypoints for enemies to follow. idk how to set this up for random procedurally generated paths lol
     private int wavepointIndex = 0;
 
-    void Start()
+    public virtual void Initialize()
     {
         EnemyCurrentHealth = EnemyMaxHealth;
 
@@ -22,12 +26,7 @@ public class EnemyType1 : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        MoveTowardsWaypoint();
-    }
-
-    void MoveTowardsWaypoint()
+    protected void MoveTowardsWaypoint()
     {
         if (waypoints == null || wavepointIndex >= waypoints.Length) return;
 
@@ -45,7 +44,7 @@ public class EnemyType1 : MonoBehaviour
         }
     }
 
-    void GetNextWaypoint()
+    protected void GetNextWaypoint()
     {
         // if the enemy reaches the final waypoint(the tower), the player loses lives
         if (wavepointIndex >= waypoints.Length - 1)
@@ -57,13 +56,13 @@ public class EnemyType1 : MonoBehaviour
         wavepointIndex++;
     }
 
-    void EndPath()
+    protected void EndPath()
     {
         // losing tower health here
         Destroy(gameObject);
     }
 
-    public void TakeDamage(float amount)
+    public virtual void TakeDamage(float amount)
     {
         EnemyCurrentHealth -= amount;
 
@@ -73,9 +72,15 @@ public class EnemyType1 : MonoBehaviour
         }
     }
 
-    void Die()
+    protected void Die()
     {
         // loot logic like player gets money when enemies die idk
+        coinManager.addCoin(10);
         Destroy(gameObject);
+    }
+
+    protected virtual void DoDamage(int amount)
+    {
+        
     }
 }

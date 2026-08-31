@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class TowerProjectile : MonoBehaviour
@@ -8,6 +9,12 @@ public class TowerProjectile : MonoBehaviour
 
     public float speed = 20f;
     public int damage = 10;
+    public float lifeSpan = 10f;
+
+    private void Start()
+    {
+        Destroy(gameObject, lifeSpan); //kills itself after 10 seconds so theres not a hundred clones
+    }
 
     public void Seek(Transform _target)
     {
@@ -40,7 +47,7 @@ public class TowerProjectile : MonoBehaviour
 
     void HitTarget()
     {
-        EnemyType1 enemy = target.GetComponent<EnemyType1>(); //get enemytype1 script to access health and takedamage method
+        EnemyAnt enemy = target.GetComponent<EnemyAnt>(); //get enemytype1 script to access health and takedamage method
         
         if (enemy != null)
         {
