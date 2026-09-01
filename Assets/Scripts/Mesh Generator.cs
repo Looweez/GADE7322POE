@@ -22,6 +22,8 @@ public class MeshGenerator : MonoBehaviour
 
     private float minTerrainHeight;
     private float maxTerrainHeight;
+    
+    public System.Action OnMeshGenerated;
 
     void Start()
     {
@@ -95,6 +97,9 @@ public class MeshGenerator : MonoBehaviour
                 i++;
             }
         }
+         UpdateMesh();
+         
+         OnMeshGenerated?.Invoke();
 
     }
 
@@ -109,6 +114,12 @@ public class MeshGenerator : MonoBehaviour
         mesh.RecalculateNormals();
     }
 
+    public float GetTerrainHeightAt(float worldX, float worldZ) //this will be used to find the center of the mesh so the tower can spawn there 
+    {
+        float height = Mathf.PerlinNoise((worldX * 0.3f) + offsetX, (worldZ * 0.3f) * offsetZ) * 2f;
+        return height;
+    }
+    
     /*private void OnDrawGizmos()
     {
         if (vertices == null)
