@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
     private int spawnedCount = 0;
     private bool isSpawning = false;
 
-    // Call this to begin the wave (or connect it to a UI Start Wave button)
+    // begin the wave (or connect it to a UI Start Wave button)
     public void StartSpawningWave()
     {
         if (pathGenerator.enemyPaths.Count == 0)

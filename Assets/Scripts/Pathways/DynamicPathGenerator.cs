@@ -131,14 +131,14 @@ public class DynamicPathGenerator : MonoBehaviour
             }
 
             float y = meshGenerator.GetTerrainHeightAt(current.x, current.z);
-            path.Add(new Vector3(current.x, y + 0.2f, current.z));
+            path.Add(new Vector3(current.x, y + 1.0f, current.z));
             current = current.parent;
         }
 
         if (current == startNode)
         {
             float startY = meshGenerator.GetTerrainHeightAt(startNode.x, startNode.z);
-            path.Add(new Vector3(startNode.x, startY + 0.2f, startNode.z));
+            path.Add(new Vector3(startNode.x, startY + 1.0f, startNode.z));
         }
 
         path.Reverse();

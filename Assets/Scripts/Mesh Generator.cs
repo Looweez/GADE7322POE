@@ -33,7 +33,7 @@ public class MeshGenerator : MonoBehaviour
         offsetX = Random.Range(0f, 99999f);
         offsetZ = Random.Range(0f, 99999f);
 
-        StartCoroutine(CreateShape());
+        CreateShape();
     }
 
     private void Update()
@@ -41,7 +41,7 @@ public class MeshGenerator : MonoBehaviour
         UpdateMesh();
     }
 
-    IEnumerator CreateShape()
+    void CreateShape()
     {
         vertices = new Vector3[(xSize + 1) * (zSize + 1)];
 
@@ -49,7 +49,7 @@ public class MeshGenerator : MonoBehaviour
         {
             for (int x = 0; x <= xSize; x++)
             {
-                float y = Mathf.PerlinNoise((x * 0.3f) + offsetX, (z * 0.3f) * offsetZ) * 2f;
+                float y = Mathf.PerlinNoise((x * 0.3f) + offsetX, (z * 0.3f) + offsetZ) * 2f;
                 vertices[i] = new Vector3(x, y, z);
                 
                 if (y > maxTerrainHeight)
@@ -80,7 +80,6 @@ public class MeshGenerator : MonoBehaviour
                 vert++;
                 tris += 6;
 
-                yield return new WaitForSeconds(0.01f);
             }
 
             vert++;
@@ -116,7 +115,7 @@ public class MeshGenerator : MonoBehaviour
 
     public float GetTerrainHeightAt(float worldX, float worldZ) //this will be used to find the center of the mesh so the tower can spawn there 
     {
-        float height = Mathf.PerlinNoise((worldX * 0.3f) + offsetX, (worldZ * 0.3f) * offsetZ) * 2f;
+        float height = Mathf.PerlinNoise((worldX * 0.3f) + offsetX, (worldZ * 0.3f) + offsetZ) * 2f;
         return height;
     }
     
