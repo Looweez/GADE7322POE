@@ -111,6 +111,13 @@ public class MeshGenerator : MonoBehaviour
         mesh.colors = colors;
         
         mesh.RecalculateNormals();
+        
+        // adds mesh collider so that raycasts can detect when mouse is hovering over mesh for placement of defenders
+        if (!TryGetComponent<MeshCollider>(out MeshCollider meshCollider))
+        {
+            meshCollider = gameObject.AddComponent<MeshCollider>();
+        }
+        meshCollider.sharedMesh = mesh;
     }
 
     public float GetTerrainHeightAt(float worldX, float worldZ) //this will be used to find the center of the mesh so the tower can spawn there 
