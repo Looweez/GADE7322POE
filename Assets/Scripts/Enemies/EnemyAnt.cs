@@ -44,6 +44,13 @@ public class EnemyAnt : EnemyBase
                     tower.TakeDamage(damage);
                 }
             }
+            else if(hitCollider.CompareTag("Defender"))
+            {
+                if (hitCollider.TryGetComponent<DefenderBase>(out DefenderBase defender))
+                {
+                    defender.TakeDamage(damage);
+                }
+            }
         }
     }
 

@@ -3,8 +3,8 @@ using UnityEngine;
 public class DefenderBase : MonoBehaviour
 {
     [Header("Enemy Stats")]
-    public float speed = 3f;
-    public float defenderMaxHealth = 100f;
+    public float speed;
+    public float defenderMaxHealth;
     public float defenderCurrentHealth;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,5 +26,14 @@ public class DefenderBase : MonoBehaviour
         {
             transform.position = waypoints[0].position;
         }*/
+    }
+
+    public void TakeDamage(int damage)
+    {
+        defenderCurrentHealth -= damage;
+        if (defenderCurrentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
