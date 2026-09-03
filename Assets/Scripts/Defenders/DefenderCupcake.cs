@@ -11,6 +11,11 @@ public class DefenderCupcake : DefenderBase
     private Transform towerTransform;
     private float attackTimer;
     
+    private void Start()
+    {
+        Initialize(); // Must be called so towerTransform gets assigned!
+    }
+    
     public override void Initialize()
     {
         base.Initialize();

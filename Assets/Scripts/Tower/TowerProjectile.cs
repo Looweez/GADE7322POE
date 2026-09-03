@@ -23,7 +23,7 @@ public class TowerProjectile : MonoBehaviour
 
     void Update()
     {
-        if (target == null) //if the enemy dies before the projectile reaches the them, the projectile is destroyed
+        if (target == null) //if the enemy dies before the projectile reaches them, the projectile is destroyed
         {
             Destroy(gameObject);
             return;
@@ -47,11 +47,11 @@ public class TowerProjectile : MonoBehaviour
 
     void HitTarget()
     {
-        EnemyAnt enemy = target.GetComponent<EnemyAnt>(); //get enemytype1 script to access health and takedamage method
+        EnemyBase enemy = target.GetComponent<EnemyBase>(); //get enemy script to access health and takedamage method
         
         if (enemy != null)
         {
-            enemy.TakeDamage(damage); //call takedamage method inside of enemytype1
+            enemy.TakeDamage(damage); //call takedamage method inside of enemy
         }
         Destroy(gameObject); //destroy projectile after it hits the enemy + deals damage
         

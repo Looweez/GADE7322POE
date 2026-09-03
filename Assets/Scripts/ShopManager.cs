@@ -1,18 +1,28 @@
+using TMPro;
 using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
-    CoinManager coinManager;
-    DefenderSpawner _defenderSpawner;
+    public DefenderPlacementManager placementManager;
     
-    private int cupcakePrice = 25;
-    private int snowballPrice; //these two will be used laterss
-    private int jellytotPrice;
 
+    public GameObject cupcakePrefab;
+    public GameObject snowballPrefab;
+    public GameObject jellytotPrefab;
+    
+    public int cupcakePrice = 25;
+    public int snowballPrice = 35; //aadded later
+    public int jellytotPrice = 50;
+    
     public void BuyCupcake()
     {
-        coinManager.coins -= cupcakePrice;
-        _defenderSpawner.SpawnDefender("Cupcake");
+        if (CoinManager.Instance != null && CoinManager.Instance.CanAfford(cupcakePrice))
+        {
+            placementManager.SelectDefenderToPlace(cupcakePrefab, cupcakePrice); //if the player can afford a cupcake, they go into placement mode
+        }
+        else
+        {
+            Debug.LogWarning("not enough coins");
+        }
     }
-    
 }

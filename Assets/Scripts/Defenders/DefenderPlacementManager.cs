@@ -26,9 +26,14 @@ public class DefenderPlacementManager : MonoBehaviour
         
     }
     
-    public void SelectDefenderToPlace()
+    public void SelectDefenderToPlace(GameObject prefabToPlace, int cost)
     {
+        CancelPlacement(); //removes outline/preview thing after they place down defender
 
+        isPlacing = true;
+        
+        defenderPrefab = prefabToPlace;
+        defenderCost = cost;
         isPlacing = true;
         
         currentOutline = Instantiate(defenderPrefab);
@@ -53,22 +58,25 @@ public class DefenderPlacementManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, 1000f))
         {
-            currentOutline.transform.position = hit.point;
+            currentOutline.transform.position = hit.point; //display preview if they can place defender there
+            
         }
     }
     
     private void TryPlaceDefender()
     {
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()); //raycast to ground
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 1000f))
+        if (Physics.Raycast(ray, out RaycastHit hit, 1000f)) //if there is ground for defender to be placed on
         {
-            if (HasEnoughGold(defenderCost))
+            if (HasEnoughGold(defenderCost)) // and if player has enough gold
             {
-                DeductGold(defenderCost);
+                SpendGold(defenderCost); //spend amt of gold = to cost of defender
                 
                 // spawn defender
                 Instantiate(defenderPrefab, hit.point, Quaternion.identity);
+                
+                CancelPlacement();
 
             }
             else
@@ -78,12 +86,12 @@ public class DefenderPlacementManager : MonoBehaviour
         }
     }
     
-    public void CancelPlacement()
+    public void CancelPlacement() //messing it up idk
     {
         isPlacing = false;
         if (currentOutline != null)
         {
-            Destroy(currentOutline);
+            Destroy(currentOutline); //cancel the placement
         }
     }
     
@@ -96,7 +104,7 @@ public class DefenderPlacementManager : MonoBehaviour
         return false; 
     }
 
-    private void DeductGold(int amount)
+    private void SpendGold(int amount)
     {
         if (CoinManager.Instance != null)
         {

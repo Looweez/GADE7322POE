@@ -4,11 +4,10 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class EnemyBase : MonoBehaviour
 {
-    CoinManager coinManager;
+    //CoinManager coinManager;
     
-    [Header("Enemy Stats")]
     public float speed = 3f;
-    public float EnemyMaxHealth = 100f;
+    public float EnemyMaxHealth = 50f;
     public float EnemyCurrentHealth;
     
     
@@ -74,8 +73,16 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected void Die()
     {
-        // loot logic like player gets money when enemies die idk
-        coinManager.addCoin(10);
+        if (CoinManager.Instance != null)
+        {
+            CoinManager.Instance.addCoin(10);
+            Debug.Log("added coins");
+        }
+        else
+        {
+            Debug.LogWarning("no coinmanager");
+        }
+
         Destroy(gameObject);
     }
 
