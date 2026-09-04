@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DefenderBase : MonoBehaviour
 {
-    [Header("Enemy Stats")]
+  
     public float speed;
     public float defenderMaxHealth;
     public float defenderCurrentHealth;

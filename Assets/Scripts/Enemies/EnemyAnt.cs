@@ -4,18 +4,18 @@ using UnityEngine;
 public class EnemyAnt : EnemyBase
 {
     
-  //  public Transform[] waypoints; //waypoints for enemies to follow. idk how to set this up for random procedurally generated paths lol
-   // private int wavepointIndex = 0;
+    //  public Transform[] waypoints; //waypoints for enemies to follow. idk how to set this up for random procedurally generated paths lol
+    // private int wavepointIndex = 0;
    
-   private void Start()
-   {
-       Initialize(); // Ensures health is set when spawned
-   }
+    private void Start()
+    {
+        Initialize(); // Ensures health is set when spawned
+    }
 
-   private void Update()
-   {
-       MoveTowardsWaypoint();
-   }
+    private void Update()
+    {
+        MoveTowardsWaypoint();
+    }
 
     public override void Initialize()
     {
@@ -54,6 +54,7 @@ public class EnemyAnt : EnemyBase
             }
         }
     }
+
 
     /*void MoveTowardsWaypoint()
     {

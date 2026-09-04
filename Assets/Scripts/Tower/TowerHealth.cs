@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class TowerHealth : MonoBehaviour
 {
-    
-    //handles tower (the players base) health, losing health if enemies reach it, and destroying tower/ending game if health reaches 0
     public int maxHealth = 100;
     public int currentHealth;
 
@@ -13,10 +11,13 @@ public class TowerHealth : MonoBehaviour
         UIController.Instance?.UpdateTowerHealthText();
     }
 
-    public void TakeDamage(int damageAmount) //for when enemy gets through defenders and reaches the tower
+    public void TakeDamage(int damageAmount) 
     {
         currentHealth -= damageAmount;
         Debug.Log("Tower health:" + currentHealth);
+
+        // FIX: Tell the UI controller to update the text right when damage is taken!
+        UIController.Instance?.UpdateTowerHealthText();
 
         if (currentHealth <= 0)
         {
@@ -27,7 +28,6 @@ public class TowerHealth : MonoBehaviour
     void DestroyTower()
     {
         Debug.Log("Tower destroyed");
-        //need to add gameover screen / restart here
         UIController.Instance?.GameOver();
         Destroy(gameObject);
     }

@@ -124,9 +124,7 @@ GameObject:
   - component: {fileID: 6617753534629682380}
   - component: {fileID: 8755517516842801921}
   - component: {fileID: 6386939030260721575}
-  - component: {fileID: 7616946221875989401}
   - component: {fileID: 8089592801462689686}
-  - component: {fileID: 2640095767044729712}
   m_Layer: 0
   m_Name: EnemyAnt
   m_TagString: Enemy
@@ -237,28 +235,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
---- !u!195 &7616946221875989401
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5208401241978248896}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  damageToTower: 10
+  attackDamage: 8
+  attackRange: 2
+  attackInterval: 1.5
 --- !u!114 &8089592801462689686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,20 +255,6 @@ MonoBehaviour:
   EnemyMaxHealth: 50
   EnemyCurrentHealth: 0
   waypoints: []
---- !u!114 &2640095767044729712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5208401241978248896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d4d5d455aa85514fa672c0145295814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 2878359540843816842}
-  offset: {x: 0, y: 2, z: 0}
 --- !u!1 &5213846640233256199
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,6 +303,7 @@ GameObject:
   - component: {fileID: 2568980406169140556}
   - component: {fileID: 7028990040762096442}
   - component: {fileID: 8647248653359934596}
+  - component: {fileID: 1235163569264178221}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -427,6 +394,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1235163569264178221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6589373518958446633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d4d5d455aa85514fa672c0145295814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 2878359540843816842}
+  offset: {x: 0, y: 2, z: 0}
 --- !u!1 &7400796834934414934
 GameObject:
   m_ObjectHideFlags: 0

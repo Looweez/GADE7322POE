@@ -28,6 +28,46 @@ public class DynamicPathGenerator : MonoBehaviour
         }
 
         Debug.Log($"Total valid paths created: {enemyPaths.Count}");
+
+        // Draw the paths visibly in the game scene
+        DrawPaths();
+    }
+
+    private void DrawPaths()
+    {
+        // Clear any old path lines if regenerating
+        foreach (Transform child in transform)
+        {
+            if (child.name.StartsWith("PathLine_"))
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
+        for (int i = 0; i < enemyPaths.Count; i++)
+        {
+            List<Vector3> path = enemyPaths[i];
+            
+            // Create a child object for the line renderer
+            GameObject lineObj = new GameObject($"PathLine_{i}");
+            lineObj.transform.parent = transform;
+            
+            LineRenderer lr = lineObj.AddComponent<LineRenderer>();
+            lr.positionCount = path.Count;
+            lr.SetPositions(path.ToArray());
+            
+            // Style the line so it's easy to see
+            lr.startWidth = 0.4f;
+            lr.endWidth = 0.4f;
+            
+            // Use a basic unlit material so it stands out clearly on the terrain
+            lr.material = new Material(Shader.Find("Sprites/Default"));
+            lr.startColor = new Color(1f, 0.3f, 0.3f, 0.8f); // Soft Red
+            lr.endColor = new Color(1f, 1f, 0.3f, 0.8f);   // Soft Yellow
+            
+            // Ensure lines render nicely over the terrain
+            lr.useWorldSpace = true;
+        }
     }
 
     private List<Vector2Int> GetThreeRandomEdgeNodes()
@@ -45,73 +85,72 @@ public class DynamicPathGenerator : MonoBehaviour
     }
 
     private List<Vector3> FindPathAStar(Vector2Int start, Vector2Int target)
-{
-    PathNode[,] grid = new PathNode[meshGenerator.xSize + 1, meshGenerator.zSize + 1];
-
-    for (int x = 0; x <= meshGenerator.xSize; x++)
-        for (int z = 0; z <= meshGenerator.zSize; z++)
-            grid[x, z] = new PathNode(x, z);
-
-    List<PathNode> openSet = new List<PathNode>();
-    HashSet<PathNode> closedSet = new HashSet<PathNode>();
-
-    PathNode startNode = grid[start.x, start.y];
-    PathNode targetNode = grid[target.x, target.y];
-
-    openSet.Add(startNode);
-
-    // SAFETY COUNTER: Prevents Unity from freezing if pathing gets stuck
-    int maxIterations = 5000;
-    int iterations = 0;
-
-    while (openSet.Count > 0)
     {
-        iterations++;
-        if (iterations > maxIterations)
+        PathNode[,] grid = new PathNode[meshGenerator.xSize + 1, meshGenerator.zSize + 1];
+
+        for (int x = 0; x <= meshGenerator.xSize; x++)
+            for (int z = 0; z <= meshGenerator.zSize; z++)
+                grid[x, z] = new PathNode(x, z);
+
+        List<PathNode> openSet = new List<PathNode>();
+        HashSet<PathNode> closedSet = new HashSet<PathNode>();
+
+        PathNode startNode = grid[start.x, start.y];
+        PathNode targetNode = grid[target.x, target.y];
+
+        openSet.Add(startNode);
+
+        int maxIterations = 5000;
+        int iterations = 0;
+
+        while (openSet.Count > 0)
         {
-            Debug.LogError($"Pathfinding timed out between {start} and {target}!");
-            return null;
-        }
-
-        PathNode current = openSet[0];
-        for (int i = 1; i < openSet.Count; i++)
-        {
-            if (openSet[i].fCost < current.fCost || (openSet[i].fCost == current.fCost && openSet[i].hCost < current.hCost))
-                current = openSet[i];
-        }
-
-        openSet.Remove(current);
-        closedSet.Add(current);
-
-        if (current.x == targetNode.x && current.z == targetNode.z)
-        {
-            return RetracePath(startNode, targetNode);
-        }
-
-        foreach (PathNode neighbor in GetNeighbours(grid, current))
-        {
-            if (closedSet.Contains(neighbor)) continue;
-
-            float currentY = meshGenerator.GetTerrainHeightAt(current.x, current.z);
-            float neighborY = meshGenerator.GetTerrainHeightAt(neighbor.x, neighbor.z);
-            float slopePenalty = Mathf.Abs(neighborY - currentY) * 5f;
-
-            float newCostToNeighbor = current.gCost + Vector2.Distance(new Vector2(current.x, current.z), new Vector2(neighbor.x, neighbor.z)) + slopePenalty;
-
-            if (newCostToNeighbor < neighbor.gCost || !openSet.Contains(neighbor))
+            iterations++;
+            if (iterations > maxIterations)
             {
-                neighbor.gCost = newCostToNeighbor;
-                neighbor.hCost = Vector2.Distance(new Vector2(neighbor.x, neighbor.z), new Vector2(targetNode.x, targetNode.z));
-                neighbor.parent = current;
+                Debug.LogError($"Pathfinding timed out between {start} and {target}!");
+                return null;
+            }
 
-                if (!openSet.Contains(neighbor))
-                    openSet.Add(neighbor);
+            PathNode current = openSet[0];
+            for (int i = 1; i < openSet.Count; i++)
+            {
+                if (openSet[i].fCost < current.fCost || (openSet[i].fCost == current.fCost && openSet[i].hCost < current.hCost))
+                    current = openSet[i];
+            }
+
+            openSet.Remove(current);
+            closedSet.Add(current);
+
+            if (current.x == targetNode.x && current.z == targetNode.z)
+            {
+                return RetracePath(startNode, targetNode);
+            }
+
+            foreach (PathNode neighbor in GetNeighbours(grid, current))
+            {
+                if (closedSet.Contains(neighbor)) continue;
+
+                float currentY = meshGenerator.GetTerrainHeightAt(current.x, current.z);
+                float neighborY = meshGenerator.GetTerrainHeightAt(neighbor.x, neighbor.z);
+                float slopePenalty = Mathf.Abs(neighborY - currentY) * 5f;
+
+                float newCostToNeighbor = current.gCost + Vector2.Distance(new Vector2(current.x, current.z), new Vector2(neighbor.x, neighbor.z)) + slopePenalty;
+
+                if (newCostToNeighbor < neighbor.gCost || !openSet.Contains(neighbor))
+                {
+                    neighbor.gCost = newCostToNeighbor;
+                    neighbor.hCost = Vector2.Distance(new Vector2(neighbor.x, neighbor.z), new Vector2(targetNode.x, targetNode.z));
+                    neighbor.parent = current;
+
+                    if (!openSet.Contains(neighbor))
+                        openSet.Add(neighbor);
+                }
             }
         }
-    }
 
-    return null;
-}
+        return null;
+    }
     
     private List<Vector3> RetracePath(PathNode startNode, PathNode endNode)
     {
@@ -131,14 +170,14 @@ public class DynamicPathGenerator : MonoBehaviour
             }
 
             float y = meshGenerator.GetTerrainHeightAt(current.x, current.z);
-            path.Add(new Vector3(current.x, y + 1.0f, current.z));
+            path.Add(new Vector3(current.x, y + 0.2f, current.z)); // Slightly above ground so it doesn't clip
             current = current.parent;
         }
 
         if (current == startNode)
         {
             float startY = meshGenerator.GetTerrainHeightAt(startNode.x, startNode.z);
-            path.Add(new Vector3(startNode.x, startY + 1.0f, startNode.z));
+            path.Add(new Vector3(startNode.x, startY + 0.2f, startNode.z));
         }
 
         path.Reverse();

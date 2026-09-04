@@ -152,6 +152,8 @@ MonoBehaviour:
   terrainLayer:
     serializedVersion: 2
     m_Bits: 1
+  pathGenerator: {fileID: 89092547}
+  pathBlockedRadius: 0.5
   defenderPrefab: {fileID: 5947911114571452616, guid: 33478a5fb911d8a4dae433b221aaff42, type: 3}
   defenderOutlineMaterial: {fileID: 0}
   defenderCost: 25

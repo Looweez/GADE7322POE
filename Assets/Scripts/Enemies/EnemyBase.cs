@@ -1,7 +1,7 @@
 using UnityEngine;
-using UnityEngine.AI;
+//using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
+//[RequireComponent(typeof(NavMeshAgent))]      removed cuz doesn need navmesh and was breakin stuff (follows waypoint)
 public abstract class EnemyBase : MonoBehaviour
 {
     //CoinManager coinManager;

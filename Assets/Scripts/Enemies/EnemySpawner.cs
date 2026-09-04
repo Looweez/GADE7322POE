@@ -18,9 +18,16 @@ public class EnemySpawner : MonoBehaviour
     // begin the wave (or connect it to a UI Start Wave button)
     public void StartSpawningWave()
     {
+        // autogenerate paths if they havent been created yet
+        if (pathGenerator.enemyPaths == null || pathGenerator.enemyPaths.Count == 0)
+        {
+            Debug.Log("Paths not found, generating now...");
+            pathGenerator.GeneratePathways();
+        }
+
         if (pathGenerator.enemyPaths.Count == 0)
         {
-            Debug.LogWarning("No paths available yet!");
+            Debug.LogWarning("No paths available yet! Ensure MeshGenerator is assigned on PathGenerator.");
             return;
         }
 

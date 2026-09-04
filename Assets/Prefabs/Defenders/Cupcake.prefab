@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: 3156583584414790615}
   - component: {fileID: 3236552813705954863}
   - component: {fileID: 984734415376933138}
+  - component: {fileID: 6249523755215160170}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -414,6 +415,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6249523755215160170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4332261351202218029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d4d5d455aa85514fa672c0145295814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 5809451211179539137}
+  offset: {x: 0, y: 2, z: 0}
 --- !u!1 &5947911114571452616
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,7 +442,6 @@ GameObject:
   - component: {fileID: 1945679886882771358}
   - component: {fileID: 8798127005712156440}
   - component: {fileID: 2495642754657785019}
-  - component: {fileID: 8611089218164097391}
   m_Layer: 0
   m_Name: Cupcake
   m_TagString: Defender
@@ -538,25 +552,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  defenderMaxHealth: 0
+  defenderMaxHealth: 50
   defenderCurrentHealth: 0
-  detectionRadius: 10
-  attackDamage: 15
-  attackInterval: 1.5
---- !u!114 &8611089218164097391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5947911114571452616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d4d5d455aa85514fa672c0145295814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 5809451211179539137}
-  offset: {x: 0, y: 2, z: 0}
+  detectionRadius: 12
+  attackDamage: 25
+  attackInterval: 1
 --- !u!1 &6094200494478630672
 GameObject:
   m_ObjectHideFlags: 0
