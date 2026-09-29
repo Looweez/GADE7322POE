@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("References")]
     public GameObject enemyPrefab;
     public DynamicPathGenerator pathGenerator;
-
-    [Header("Spawn Settings")]
+    
     public float spawnInterval = 2f;
     public int totalEnemiesToSpawn = 15;
 
     private int spawnedCount = 0;
     private bool isSpawning = false;
 
-    // begin the wave (or connect it to a UI Start Wave button)
+    // begin the wave
     public void StartSpawningWave()
     {
         // autogenerate paths if they havent been created yet
@@ -27,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (pathGenerator.enemyPaths.Count == 0)
         {
-            Debug.LogWarning("No paths available yet! Ensure MeshGenerator is assigned on PathGenerator.");
+            Debug.LogWarning("no paths available");
             return;
         }
 
@@ -55,18 +53,16 @@ public class EnemySpawner : MonoBehaviour
     {
         List<List<Vector3>> paths = pathGenerator.enemyPaths;
         
-        // Pick one of the 3 paths at random
+        // pick path
         int randomPathIndex = Random.Range(0, paths.Count);
         List<Vector3> selectedPath = paths[randomPathIndex];
 
-        // Ensure the selected path has points
+      
         if (selectedPath == null || selectedPath.Count == 0) return;
 
-        // Instantiate enemy at the start of the path (index 0)
+        // place enemy at start
         Vector3 spawnPosition = selectedPath[0];
         GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-
-        // Assign the path to the enemy follower script
         if (newEnemy.TryGetComponent<EnemyPathFollower>(out EnemyPathFollower follower))
         {
             follower.SetupPath(selectedPath);

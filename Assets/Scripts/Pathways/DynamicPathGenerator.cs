@@ -28,14 +28,13 @@ public class DynamicPathGenerator : MonoBehaviour
         }
 
         Debug.Log($"Total valid paths created: {enemyPaths.Count}");
-
-        // Draw the paths visibly in the game scene
+        
         DrawPaths();
     }
 
     private void DrawPaths()
     {
-        // Clear any old path lines if regenerating
+   
         foreach (Transform child in transform)
         {
             if (child.name.StartsWith("PathLine_"))
@@ -48,7 +47,7 @@ public class DynamicPathGenerator : MonoBehaviour
         {
             List<Vector3> path = enemyPaths[i];
             
-            // Create a child object for the line renderer
+         
             GameObject lineObj = new GameObject($"PathLine_{i}");
             lineObj.transform.parent = transform;
             
@@ -56,16 +55,15 @@ public class DynamicPathGenerator : MonoBehaviour
             lr.positionCount = path.Count;
             lr.SetPositions(path.ToArray());
             
-            // Style the line so it's easy to see
+            //style lines
             lr.startWidth = 0.4f;
             lr.endWidth = 0.4f;
             
-            // Use a basic unlit material so it stands out clearly on the terrain
+            //material so u can see paths
             lr.material = new Material(Shader.Find("Sprites/Default"));
-            lr.startColor = new Color(1f, 0.3f, 0.3f, 0.8f); // Soft Red
-            lr.endColor = new Color(1f, 1f, 0.3f, 0.8f);   // Soft Yellow
-            
-            // Ensure lines render nicely over the terrain
+            lr.startColor = new Color(1f, 0.3f, 0.3f, 0.8f); 
+            lr.endColor = new Color(1f, 1f, 0.3f, 0.8f);   
+         
             lr.useWorldSpace = true;
         }
     }
@@ -170,7 +168,7 @@ public class DynamicPathGenerator : MonoBehaviour
             }
 
             float y = meshGenerator.GetTerrainHeightAt(current.x, current.z);
-            path.Add(new Vector3(current.x, y + 0.2f, current.z)); // Slightly above ground so it doesn't clip
+            path.Add(new Vector3(current.x, y + 0.2f, current.z)); // above ground
             current = current.parent;
         }
 

@@ -120,7 +120,7 @@ public class MeshGenerator : MonoBehaviour
         meshCollider.sharedMesh = mesh;
     }
 
-    public float GetTerrainHeightAt(float worldX, float worldZ) //this will be used to find the center of the mesh so the tower can spawn there 
+    public float GetTerrainHeightAt(float worldX, float worldZ) //tfinds centre of mesh to spawn tower there
     {
         float height = Mathf.PerlinNoise((worldX * 0.3f) + offsetX, (worldZ * 0.3f) + offsetZ) * 2f;
         return height;

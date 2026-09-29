@@ -9,7 +9,7 @@ public class DefenderPlacementManager : MonoBehaviour
     
     [Header("Path Blocking Settings")]
     public DynamicPathGenerator pathGenerator;
-    public float pathBlockedRadius = 1.5f; // How close a defender can be to the path
+    public float pathBlockedRadius = 1.5f; 
 
     [Header("Defender Settings")]
     public GameObject defenderPrefab;
@@ -25,8 +25,7 @@ public class DefenderPlacementManager : MonoBehaviour
         {
             mainCamera = Camera.main;
         }
-
-        // Auto-find path generator if not assigned in inspector
+        
         if (pathGenerator == null)
         {
             pathGenerator = FindObjectOfType<DynamicPathGenerator>();
@@ -55,13 +54,13 @@ public class DefenderPlacementManager : MonoBehaviour
         
         currentOutline = Instantiate(defenderPrefab);
         
-        // disable colliders so doesn't block enemies or projectiles
+        // disable collider
         foreach (var collider in currentOutline.GetComponentsInChildren<Collider>())
         {
             collider.enabled = false;
         }
 
-        // disable scripts on the preview so it doesn't attack or be attacked
+        // disable scripts on the preview
         foreach (var script in currentOutline.GetComponentsInChildren<MonoBehaviour>())
         {
             if (script != this)
@@ -95,19 +94,19 @@ public class DefenderPlacementManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, 1000f))
         {
-            // CHECK 1: Is the drop location too close to an enemy path?
+            // check if location too close to path
             if (IsTooCloseToPath(hit.point))
             {
                 Debug.LogWarning("Cannot place defender on or near the enemy path!");
                 return;
             }
 
-            // CHECK 2: Does the player have enough gold?
+            // can player afford
             if (HasEnoughGold(defenderCost)) 
             {
                 SpendGold(defenderCost);
                 
-                // Spawn actual defender instead of the preview
+                // spawn actual defender instead of preview
                 Instantiate(defenderPrefab, hit.point, Quaternion.identity);
                 
                 CancelPlacement();
@@ -127,11 +126,11 @@ public class DefenderPlacementManager : MonoBehaviour
         {
             foreach (var pathPoint in path)
             {
-                // Check horizontal distance (X and Z) so terrain height differences don't mess it up
+               
                 float distance = Vector2.Distance(new Vector2(position.x, position.z), new Vector2(pathPoint.x, pathPoint.z));
                 if (distance < pathBlockedRadius)
                 {
-                    return true; // Too close to the road!
+                    return true; //to close to path
                 }
             }
         }
