@@ -17,7 +17,7 @@ public class DefenderBase : MonoBehaviour
         }*/
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         defenderCurrentHealth -= damage;
         if (defenderCurrentHealth <= 0)

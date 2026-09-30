@@ -3,18 +3,20 @@ using UnityEngine;
 
 public class EnemyPathFollower : MonoBehaviour
 {
- 
-    public float speed = 3f;
+    //public float speed = 3f;
     private List<Vector3> pathWaypoints;
     private int currentWaypointIndex = 0;
 
-    public int damageToTower = 10;
+    /*public int damageToTower = 10;
     public int attackDamage = 10;
     public float attackRange = 1.2f;
     public float attackInterval = 1.5f;
     private float attackTimer;
 
-    private DefenderBase currentDefenderTarget;
+    private DefenderBase currentDefenderTarget;*/
+    
+    [HideInInspector] public bool isPaused = false;
+    private EnemyBase enemyBase;
 
     public void SetupPath(List<Vector3> newPath)
     {
@@ -27,28 +29,13 @@ public class EnemyPathFollower : MonoBehaviour
 
     private void Update()
     {
-        if (pathWaypoints == null || currentWaypointIndex >= pathWaypoints.Count) return;
+        if (isPaused || pathWaypoints == null || currentWaypointIndex >= pathWaypoints.Count) return;
 
-        //check for defender
-        FindDefenderTarget();
+        float moveSpeed = (enemyBase != null) ? enemyBase.speed : 3f;
 
-        if (currentDefenderTarget != null)
-        {
-           
-            attackTimer += Time.deltaTime;
-            if (attackTimer >= attackInterval)
-            {
-                attackTimer = 0f;
-                currentDefenderTarget.TakeDamage(attackDamage);
-                Debug.Log("Enemy attacked defender!");
-            }
-            return; //stops enemy movement while attacking defeneder
-        }
-
-        //path movement
         Vector3 target = pathWaypoints[currentWaypointIndex];
-        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-        
+        transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
+
         Vector3 dir = (target - transform.position).normalized;
         if (dir != Vector3.zero)
         {
@@ -58,15 +45,10 @@ public class EnemyPathFollower : MonoBehaviour
         if (Vector3.Distance(transform.position, target) < 0.1f)
         {
             currentWaypointIndex++;
-            
-            if (currentWaypointIndex >= pathWaypoints.Count)
-            {
-                DamageTowerAndDie();
-            }
         }
     }
 
-    private void FindDefenderTarget()
+    /*private void FindDefenderTarget()
     {
  
         if (currentDefenderTarget == null)
@@ -107,5 +89,5 @@ public class EnemyPathFollower : MonoBehaviour
         }
 
         Destroy(gameObject);
-    }
+    }*/
 }

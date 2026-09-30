@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    public GameObject[] enemyPrefabs;
     public DynamicPathGenerator pathGenerator;
     
     public float spawnInterval = 2f;
@@ -60,9 +60,11 @@ public class EnemySpawner : MonoBehaviour
       
         if (selectedPath == null || selectedPath.Count == 0) return;
 
+        int i = Random.Range(0, enemyPrefabs.Length); //good coding practice for if we eva need to add more enemies
+        
         // place enemy at start
         Vector3 spawnPosition = selectedPath[0];
-        GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        GameObject newEnemy = Instantiate(enemyPrefabs[i], spawnPosition, Quaternion.identity);
         if (newEnemy.TryGetComponent<EnemyPathFollower>(out EnemyPathFollower follower))
         {
             follower.SetupPath(selectedPath);

@@ -1263,6 +1263,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &643835494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 643835496}
+  - component: {fileID: 643835495}
+  m_Layer: 0
+  m_Name: PathFollower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &643835495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643835494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4901e7c4398d4a745ac0f8bb0d20383e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPaused: 0
+--- !u!4 &643835496
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643835494}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 663.5, y: 272, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &661017336
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,7 +1337,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1464311cc5d027d419e8c10f8c75e9f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 5208401241978248896, guid: 0a142716ee6140442b761638201f4076, type: 3}
+  enemyPrefabs:
+  - {fileID: 5208401241978248896, guid: 0a142716ee6140442b761638201f4076, type: 3}
+  - {fileID: 5208401241978248896, guid: 0b98f2daae28e0245979fc2524e3423c, type: 3}
+  - {fileID: 5208401241978248896, guid: e82773a215729014c9751061abd7f029, type: 3}
   pathGenerator: {fileID: 89092547}
   spawnInterval: 2
   totalEnemiesToSpawn: 15
@@ -2940,3 +2988,4 @@ SceneRoots:
   - {fileID: 1167747203}
   - {fileID: 1881882167}
   - {fileID: 503253857}
+  - {fileID: 643835496}

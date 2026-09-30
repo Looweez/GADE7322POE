@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class TowerHealth : MonoBehaviour
 {
-    public int maxHealth = 100;
-    public int currentHealth;
+    public float maxHealth = 100;
+    public float currentHealth;
 
     void Start()
     {
@@ -11,7 +11,7 @@ public class TowerHealth : MonoBehaviour
         UIController.Instance?.UpdateTowerHealthText();
     }
 
-    public void TakeDamage(int damageAmount) 
+    public void TakeDamage(float damageAmount) 
     {
         currentHealth -= damageAmount;
         Debug.Log("Tower health:" + currentHealth);
