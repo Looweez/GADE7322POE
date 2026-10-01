@@ -25,4 +25,28 @@ public class ShopManager : MonoBehaviour
             Debug.LogWarning("not enough coins");
         }
     }
+    
+    public void BuyJellytot()
+    {
+        if (CoinManager.Instance != null && CoinManager.Instance.CanAfford(jellytotPrice))
+        {
+            placementManager.SelectDefenderToPlace(jellytotPrefab, jellytotPrice);
+        }
+        else
+        {
+            Debug.LogWarning("not enough coins");
+        }
+    }
+    
+    public void BuySnowball()
+    {
+        if (CoinManager.Instance != null && CoinManager.Instance.CanAfford(snowballPrice))
+        {
+            placementManager.SelectDefenderToPlace(snowballPrefab, snowballPrice);
+        }
+        else
+        {
+            Debug.LogWarning("not enough coins");
+        }
+    }
 }
