@@ -120,7 +120,7 @@ public class EnemySpawner : MonoBehaviour
     // evaluate player performance
     public void EvaluateWavePerformance()
     {
-        // Auto-find tower health if it wasn't assigned in the inspector
+       
         if (towerHealth == null)
         {
             GameObject tower = GameObject.FindGameObjectWithTag("Tower");
@@ -134,13 +134,13 @@ public class EnemySpawner : MonoBehaviour
         {
             float healthPercentage = towerHealth.GetCurrentHealthPercentage(); 
 
-            // If player finishes with high health, increase next wave's difficulty
+            // If player finishes with high health increase next waves difficulty
             if (healthPercentage >= 0.8f)
             {
                 poolModifier += 5; 
                 Debug.Log("Player dominating! Increasing next wave difficulty pool.");
             }
-            // If player finishes with low health, grant a mercy buffer
+            //If player finishes with low health lower difficulty
             else if (healthPercentage <= 0.3f)
             {
                 poolModifier -= 5;
@@ -148,7 +148,7 @@ public class EnemySpawner : MonoBehaviour
             }
         }
 
-        currentWave++; // This will now ALWAYS run successfully!
+        currentWave++;
         Debug.Log("Advanced to Wave: " + currentWave);
     }
 }
