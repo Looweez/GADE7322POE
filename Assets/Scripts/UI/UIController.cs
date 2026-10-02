@@ -1,6 +1,6 @@
-using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 public class UIController : MonoBehaviour
 {
@@ -14,7 +14,6 @@ public class UIController : MonoBehaviour
     [SerializeField] private string prefix = "Coins: "; 
     
     //wave number ui
-    //public UnityEngine.UI.Text waveText; 
     [SerializeField] private TMP_Text waveText;
 
     public void UpdateWaveText(int waveNumber)
@@ -41,7 +40,7 @@ public class UIController : MonoBehaviour
         if (gameOverPanel != null)
             gameOverPanel.SetActive(false);
 
-        // BULLETPROOF FIX: Auto-find the TowerHealth script if it wasn't dragged in the inspector
+       
         if (towerHealth == null)
         {
             GameObject tower = GameObject.FindGameObjectWithTag("Tower");
@@ -64,21 +63,56 @@ public class UIController : MonoBehaviour
 
     public void UpdateTowerHealthText()
     {
+     
+        if (towerHealth == null)
+        {
+            GameObject tower = GameObject.FindGameObjectWithTag("Tower");
+            if (tower != null)
+            {
+                towerHealth = tower.GetComponent<TowerHealth>();
+            }
+        }
+
+        if (towerHealthText == null)
+        {
+            towerHealthText = GetComponentInChildren<TextMeshProUGUI>();
+        }
+
         if (towerHealthText != null && towerHealth != null)
         {
             towerHealthText.text = $"Tower Health: {Mathf.Max(0, towerHealth.currentHealth)} / {towerHealth.maxHealth}";
         }
         else
         {
-            Debug.LogWarning("UIController is missing a reference to towerHealthText or towerHealth!");
+            Debug.LogWarning("UIController still cannot find towerHealthText or towerHealth! Check your Tower tag.");
         }
     }
     
+    [Header("Shop References")]
+    public GameObject shopPanel;
+
     public void GameOver()
     {
         if (gameOverPanel != null) 
             gameOverPanel.SetActive(true);
 
-        Time.timeScale = 0f; 
+      
+        if (shopPanel != null)
+            shopPanel.SetActive(false);
+        
+        DefenderPlacementManager placementManager = FindObjectOfType<DefenderPlacementManager>();
+        if (placementManager != null)
+        {
+            placementManager.CancelPlacement();
+        }
+
+        Time.timeScale = 0f;
+    }
+
+   
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
     }
 }

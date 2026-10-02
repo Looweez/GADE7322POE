@@ -78,7 +78,7 @@ public class DefenderCupcake : DefenderBase
         if (target.TryGetComponent<EnemyBase>(out EnemyBase enemyHealth))
         {
             enemyHealth.TakeDamage(attackDamage);
-            Debug.Log("Attacked enemy");
+            Debug.Log("attacked enemy");
         }
     }
 }

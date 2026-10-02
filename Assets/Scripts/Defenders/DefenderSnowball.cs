@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class DefenderSnowball : DefenderBase
 {
-    [Header("Snowball Settings (Heavy AoE Splash)")]
     public float detectionRadius = 10f;
-    public float attackDamage = 35f;       // Heavy damage
-    public float attackInterval = 2.5f;    // Slow firing rate
-    public float splashRadius = 3.5f;      // Area of effect explosion radius
+    public float attackDamage = 35f;       //big damage
+    public float attackInterval = 2.5f;    //slow firing
+    public float splashRadius = 3.5f;      //aoe radius
     
     private float attackTimer;
 
@@ -48,7 +47,7 @@ public class DefenderSnowball : DefenderBase
 
     private void ExplodeAtTarget(Vector3 explodePosition)
     {
-        // Hit all enemies within the splash radius
+        // hit all enemies within the splash radius
         Collider[] hitColliders = Physics.OverlapSphere(explodePosition, splashRadius);
         foreach (Collider hit in hitColliders)
         {
@@ -60,6 +59,6 @@ public class DefenderSnowball : DefenderBase
                 }
             }
         }
-        Debug.Log("Snowball dealt coconut-y splash damage to nearby enemies!");
+        Debug.Log("Snowball attacked");
     }
 }

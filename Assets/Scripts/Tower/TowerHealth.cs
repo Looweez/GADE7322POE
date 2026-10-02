@@ -8,7 +8,17 @@ public class TowerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        UIController.Instance?.UpdateTowerHealthText();
+
+       
+        if (UIController.Instance != null)
+        {
+            UIController.Instance.towerHealth = this;
+            UIController.Instance.UpdateTowerHealthText();
+        }
+        else
+        {
+            Debug.LogWarning("TowerHealth spawned, but UIController.Instance was not found!");
+        }
     }
 
     public void TakeDamage(float damageAmount) 
@@ -16,7 +26,7 @@ public class TowerHealth : MonoBehaviour
         currentHealth -= damageAmount;
         Debug.Log("Tower health:" + currentHealth);
 
-        // Tell the UI controller to update the text right when damage is taken
+    
         UIController.Instance?.UpdateTowerHealthText();
 
         if (currentHealth <= 0)
@@ -25,7 +35,6 @@ public class TowerHealth : MonoBehaviour
         }
     }
 
-    // Added this method to support the EnemySpawner skill adaptation system
     public float GetCurrentHealthPercentage()
     {
         if (maxHealth <= 0f) return 0f;

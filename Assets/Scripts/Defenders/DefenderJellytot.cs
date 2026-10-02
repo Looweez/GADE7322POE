@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class DefenderJellyTot : DefenderBase
 {
-    [Header("Jelly Tot Settings (Rapid Fire)")]
+  
     public float detectionRadius = 8f;
-    public float attackDamage = 5f;        // Low damage per shot
-    public float attackInterval = 0.4f;    // Very fast firing rate
+    public float attackDamage = 5f;        //low damage
+    public float attackInterval = 0.4f;    //fast firing rate
     
     private float attackTimer;
 
@@ -50,7 +50,7 @@ public class DefenderJellyTot : DefenderBase
         if (target.TryGetComponent<EnemyBase>(out EnemyBase enemy))
         {
             enemy.TakeDamage(attackDamage);
-            Debug.Log("Jelly Tot fired a rapid sugary shot!");
+            Debug.Log("jellytot attacked");
         }
     }
 }

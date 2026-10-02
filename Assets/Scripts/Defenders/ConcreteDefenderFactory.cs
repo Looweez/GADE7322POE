@@ -26,7 +26,7 @@ public class ConcreteDefenderFactory : DefenderFactoryBase
         DefenderBase jellyTot = obj.GetComponent<DefenderBase>();
         
         jellyTot.speed = 0f;
-        jellyTot.defenderCurrentHealth = 60f; // Lower health, fast shooter
+        jellyTot.defenderCurrentHealth = 60f; // low health fast shooter
         jellyTot.defenderMaxHealth = 60f;
         
         jellyTot.Initialize();
@@ -39,7 +39,7 @@ public class ConcreteDefenderFactory : DefenderFactoryBase
         DefenderBase snowball = obj.GetComponent<DefenderBase>();
         
         snowball.speed = 0f;
-        snowball.defenderCurrentHealth = 150f; // Sturdier tank defender
+        snowball.defenderCurrentHealth = 150f; // tank defender
         snowball.defenderMaxHealth = 150f;
         
         snowball.Initialize();
