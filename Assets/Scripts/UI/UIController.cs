@@ -12,6 +12,19 @@ public class UIController : MonoBehaviour
 
     [SerializeField] private TMP_Text coinText;
     [SerializeField] private string prefix = "Coins: "; 
+    
+    //wave number ui
+    //public UnityEngine.UI.Text waveText; 
+    [SerializeField] private TMP_Text waveText;
+
+    public void UpdateWaveText(int waveNumber)
+    {
+        if (waveText != null)
+        {
+            waveText.text = "Wave: " + waveNumber;
+            Debug.Log("UI updated: wave " + waveNumber);
+        }
+    }
 
     private void Awake()
     {

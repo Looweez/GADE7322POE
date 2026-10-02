@@ -10,9 +10,9 @@ public class ShopManager : MonoBehaviour
     public GameObject snowballPrefab;
     public GameObject jellytotPrefab;
     
-    public int cupcakePrice = 25;
-    public int snowballPrice = 35; //aadded later
-    public int jellytotPrice = 50;
+    public int cupcakePrice = 10;
+    public int snowballPrice = 20; //aadded later
+    public int jellytotPrice = 5;
     
     public void BuyCupcake()
     {
