@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 6649544481883754301}
   - component: {fileID: 2254063585145723349}
   - component: {fileID: 4471541380491003178}
+  - component: {fileID: 459735276751027381}
+  - component: {fileID: -2643275861603704972}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Tower
@@ -143,6 +145,36 @@ MonoBehaviour:
   enemyTag: Enemy
   projectilePrefab: {fileID: 932570185051618770, guid: e40bf63574a4f7a4ab366babefbcf360, type: 3}
   firePoint: {fileID: 8837099732604435465}
+--- !u!114 &459735276751027381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562524585171855821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbb8c491ee98a13498a9321815007818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentLevel: 1
+  maxLevel: 3
+  baseUpgradeCost: 30
+  costMultiplierPerLevel: 20
+  damageIncrease: 5
+  healthIncrease: 25
+--- !u!114 &-2643275861603704972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562524585171855821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac51b6f8decf5494cb387140b898310e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7052741537523498327
 GameObject:
   m_ObjectHideFlags: 0

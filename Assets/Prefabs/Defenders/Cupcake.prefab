@@ -442,6 +442,8 @@ GameObject:
   - component: {fileID: 1945679886882771358}
   - component: {fileID: 8798127005712156440}
   - component: {fileID: 2495642754657785019}
+  - component: {fileID: -2513289691275932219}
+  - component: {fileID: -2434255183451447997}
   m_Layer: 0
   m_Name: Cupcake
   m_TagString: Defender
@@ -558,6 +560,36 @@ MonoBehaviour:
   detectionRadius: 12
   attackDamage: 25
   attackInterval: 1
+--- !u!114 &-2513289691275932219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5947911114571452616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac51b6f8decf5494cb387140b898310e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-2434255183451447997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5947911114571452616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbb8c491ee98a13498a9321815007818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentLevel: 1
+  maxLevel: 3
+  baseUpgradeCost: 30
+  costMultiplierPerLevel: 20
+  damageIncrease: 5
+  healthIncrease: 25
 --- !u!1 &6094200494478630672
 GameObject:
   m_ObjectHideFlags: 0

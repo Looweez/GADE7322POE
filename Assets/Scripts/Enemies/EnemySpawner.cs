@@ -134,21 +134,21 @@ public class EnemySpawner : MonoBehaviour
         {
             float healthPercentage = towerHealth.GetCurrentHealthPercentage(); 
 
-            // If player finishes with high health increase next waves difficulty
+            // if player finishes with high health increase next waves difficulty
             if (healthPercentage >= 0.8f)
             {
                 poolModifier += 5; 
-                Debug.Log("Player dominating! Increasing next wave difficulty pool.");
+                Debug.Log("increased difficulty for next wave");
             }
-            //If player finishes with low health lower difficulty
+            //if player finishes with low health lower difficulty
             else if (healthPercentage <= 0.3f)
             {
                 poolModifier -= 5;
-                Debug.Log("Player struggling. Granting mercy buffer for next wave.");
+                Debug.Log("lowered difficulty for next wave");
             }
         }
 
         currentWave++;
-        Debug.Log("Advanced to Wave: " + currentWave);
+        Debug.Log("advanced to Wave: " + currentWave);
     }
 }
