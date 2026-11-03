@@ -339,6 +339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshGenerator: {fileID: 1650873523}
+  portalPrefab: {fileID: 3438110366191492217, guid: a1cf5fd4181394545b9e0b8779495915, type: 3}
 --- !u!4 &89092548
 Transform:
   m_ObjectHideFlags: 0
