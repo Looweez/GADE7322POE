@@ -20,7 +20,7 @@ public class DefenderCupcake : DefenderBase
     {
         base.Initialize();
         
-        //for finding the tower to tafret the closest enemy to it
+        //for finding the tower to target the closest enemy to it
         GameObject towerObj = GameObject.FindGameObjectWithTag("Tower");
         if (towerObj != null)
         {
