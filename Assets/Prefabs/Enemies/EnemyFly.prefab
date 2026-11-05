@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 8755517516842801921}
   - component: {fileID: 6386939030260721575}
   - component: {fileID: 6590220456944298159}
+  - component: {fileID: 5519699523145633509}
   m_Layer: 0
   m_Name: EnemyFly
   m_TagString: Enemy
@@ -248,6 +249,20 @@ MonoBehaviour:
   pathFollower: {fileID: 0}
   spitPrefab: {fileID: 5707457863613914121, guid: 66345113f0b6c7a45b6f42cf2789e383, type: 3}
   spitSpawnPoint: {fileID: 0}
+--- !u!114 &5519699523145633509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5208401241978248896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db22142f8709db74e9a65923b6e7cd4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeMutation: 0
+  basePointCost: 10
 --- !u!1 &5213846640233256199
 GameObject:
   m_ObjectHideFlags: 0

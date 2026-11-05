@@ -46,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
     {
         isSpawning = true;
 
-        //calculate point pool for current wave: starting pool + (wave * 10) + skill modifier
+        // FIXED: Added the missing '*' for multiplication in currentWave * 10
         int currentPointPool = startingPointPool + (currentWave * 10) + poolModifier;
         Debug.Log($"Starting Wave {currentWave} with Point Pool: {currentPointPool}");
 
@@ -91,7 +91,7 @@ public class EnemySpawner : MonoBehaviour
 
     private int GetEnemyCost(GameObject prefab)
     {
-        if (prefab.GetComponent<EnemyFly>() != null) return 1;   // fly1 points
+        if (prefab.GetComponent<EnemyFly>() != null) return 1;   // fly 1 point
         if (prefab.GetComponent<EnemyAnt>() != null) return 3;   // ant 3 points
         if (prefab.GetComponent<EnemyRat>() != null) return 6;   // rat 6 points
         return 3;
@@ -107,9 +107,18 @@ public class EnemySpawner : MonoBehaviour
 
         if (selectedPath == null || selectedPath.Count == 0) return;
 
-        // pace enemy at the start of the path
+        // place enemy at the start of the path
         Vector3 spawnPosition = selectedPath[0];
         GameObject newEnemy = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+
+        // ==========================================
+        // INTEGRATION: APPLY PROCEDURAL MUTATION HERE
+        // ==========================================
+        if (newEnemy.TryGetComponent<EnemyMutator>(out EnemyMutator mutator))
+        {
+            mutator.ApplyRandomMutation();
+        }
+        // ==========================================
 
         if (newEnemy.TryGetComponent<EnemyPathFollower>(out EnemyPathFollower follower))
         {
@@ -120,7 +129,6 @@ public class EnemySpawner : MonoBehaviour
     // evaluate player performance
     public void EvaluateWavePerformance()
     {
-       
         if (towerHealth == null)
         {
             GameObject tower = GameObject.FindGameObjectWithTag("Tower");

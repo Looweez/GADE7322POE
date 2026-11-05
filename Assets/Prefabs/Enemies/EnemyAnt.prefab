@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 8755517516842801921}
   - component: {fileID: 6386939030260721575}
   - component: {fileID: 8089592801462689686}
+  - component: {fileID: 6773844581640067891}
   m_Layer: 0
   m_Name: EnemyAnt
   m_TagString: Enemy
@@ -235,11 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4901e7c4398d4a745ac0f8bb0d20383e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  damageToTower: 10
-  attackDamage: 8
-  attackRange: 2
-  attackInterval: 1.5
+  isPaused: 0
 --- !u!114 &8089592801462689686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,8 +252,24 @@ MonoBehaviour:
   speed: 3
   EnemyMaxHealth: 50
   EnemyCurrentHealth: 0
-  damageToTower: 10
   attackDamage: 10
+  attackRange: 1.5
+  attackInterval: 1.5
+  pathFollower: {fileID: 0}
+--- !u!114 &6773844581640067891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5208401241978248896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db22142f8709db74e9a65923b6e7cd4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeMutation: 0
+  basePointCost: 10
 --- !u!1 &5213846640233256199
 GameObject:
   m_ObjectHideFlags: 0
