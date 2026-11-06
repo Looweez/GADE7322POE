@@ -25,14 +25,14 @@ public class Boid : MonoBehaviour
         Vector3 separation = ComputeSeparation(allBoids);
         Vector3 alignment = ComputeAlignment(allBoids);
 
-        // Optional: Add a subtle pull toward the tower if manager has a target reference
+        //adds a pull to the tower
         if (manager.towerTarget != null)
         {
             Vector3 toTower = manager.towerTarget.position - transform.position;
-            toTower.y = 0; // Keep horizontal orbit
+            toTower.y = 0; //keeps them orbiting horizontally
             float dist = toTower.magnitude;
             
-            // Orbit behavior: pull/push to maintain orbit radius
+            //maintains orbit
             Vector3 orbitDir = Vector3.Cross(toTower.normalized, Vector3.up);
             acceleration += orbitDir * 2f;
 
@@ -57,12 +57,10 @@ public class Boid : MonoBehaviour
         }
 
         transform.position += velocity * Time.deltaTime;
-
-        // Update color based on height
         UpdateColorByHeight();
     }
 
-    private void UpdateColorByHeight()
+    private void UpdateColorByHeight() //updates the color based on height
     {
         if (boidRenderer == null) return;
 
@@ -74,7 +72,7 @@ public class Boid : MonoBehaviour
 
         boidRenderer.GetPropertyBlock(propBlock);
         propBlock.SetColor("_Color", dynamicColor);
-        propBlock.SetColor("_BaseColor", dynamicColor); // URP compatibility
+        propBlock.SetColor("_BaseColor", dynamicColor); 
         boidRenderer.SetPropertyBlock(propBlock);
     }
 

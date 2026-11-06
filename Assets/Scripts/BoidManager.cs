@@ -70,7 +70,7 @@ public class BoidManager : MonoBehaviour
 
         for (int i = 0; i < numberOfBoids; i++)
         {
-            // Spawn in an outer ring around the tower instead of directly inside it
+            //spawns in an outer ring of the tower
             Vector3 randomDir = Random.onUnitSphere;
             randomDir.y = 0;
             randomDir.Normalize();

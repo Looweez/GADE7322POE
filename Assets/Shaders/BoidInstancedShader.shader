@@ -43,8 +43,7 @@ Shader "Custom/BoidInstancedShader"
                 float3 up = float3(0, 1, 0);
                 float3 right = normalize(cross(up, forward));
                 up = cross(forward, right);
-
-                // Construct transformation matrix explicitly
+            
                 unity_ObjectToWorld._11_21_31_41 = float4(right, 0.0);
                 unity_ObjectToWorld._12_22_32_42 = float4(up, 0.0);
                 unity_ObjectToWorld._13_23_33_43 = float4(forward, 0.0);
@@ -59,7 +58,7 @@ Shader "Custom/BoidInstancedShader"
 
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
-            // Interpolate color based on world Y height
+            //interpolates based on height
             float heightLerp = saturate((IN.worldPos.y - _MinY) / (_MaxY - _MinY));
             fixed4 col = lerp(_BaseColor, _HeightColor, heightLerp);
 

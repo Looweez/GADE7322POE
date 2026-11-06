@@ -14,7 +14,7 @@ Shader "Custom/PortalUnlitDisplacement"
     {
         Tags { "RenderType"="Opaque" "Queue"="Geometry" }
         LOD 100
-        Cull Off // Visible from both sides
+        Cull Off //visible from both sides
 
         Pass
         {
@@ -49,21 +49,21 @@ Shader "Custom/PortalUnlitDisplacement"
             {
                 v2f o;
 
-                // 1. Transform vertex to world space for uniform wave math
+                //changes vertices to world psace
                 float4 worldPos = mul(unity_ObjectToWorld, v.vertex);
                 
-                // 2. Calculate world-anchored wave displacement
+                //calculates wave displacement
                 float wave = sin((_Time.y * _Speed) + (worldPos.x * _Frequency) + (worldPos.z * _Frequency));
                 
-                // 3. Apply displacement along normals and convert back to object space
+                //applies the displacemet then converts it back
                 float3 worldDisplacement = v.normal * (wave * _Amplitude);
                 v.vertex.xyz += mul((float3x3)unity_WorldToObject, worldDisplacement);
 
-                // 4. Standard MVP transform for clip space
+                
                 o.pos = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 
-                // 5. Calculate rim lighting in world space
+                //calculates rim lighting in the world
                 float3 worldNormal = UnityObjectToWorldNormal(v.normal);
                 float3 viewDir = normalize(_WorldSpaceCameraPos - worldPos.xyz);
                 o.rim = 1.0 - saturate(dot(worldNormal, float3(0, 1, 0)));
@@ -73,11 +73,10 @@ Shader "Custom/PortalUnlitDisplacement"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // Sample texture and tint with base color
                 fixed4 tex = tex2D(_MainTex, i.uv);
                 fixed4 col = _Color * tex;
 
-                // Add emission glow along the rim
+                //adds a glow
                 float3 emission = _RimColor.rgb * i.rim * 2.0;
                 col.rgb += emission;
 

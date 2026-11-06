@@ -7,7 +7,7 @@ public class DynamicPathGenerator : MonoBehaviour
     
     public List<List<Vector3>> enemyPaths = new List<List<Vector3>>();
     
-    public GameObject portalPrefab; // Drag Mat_Portal prefab here
+    public GameObject portalPrefab; 
     private List<GameObject> activePortals = new List<GameObject>();
     public void GeneratePathways()
     {
@@ -39,7 +39,7 @@ public class DynamicPathGenerator : MonoBehaviour
         }
         activePortals.Clear();
 
-        // Spawn a portal at the start of each valid enemy path
+        //spawns a portal by each enemy pathway
         foreach (List<Vector3> path in enemyPaths)
         {
             if (path != null && path.Count > 0)
@@ -48,7 +48,6 @@ public class DynamicPathGenerator : MonoBehaviour
             
                 if (portalPrefab != null)
                 {
-                    // Instantiate portal flat on the ground at the first path waypoint
                     GameObject portalInstance = Instantiate(portalPrefab, spawnPoint + Vector3.up * 0.1f, Quaternion.identity);
                     activePortals.Add(portalInstance);
                 }
