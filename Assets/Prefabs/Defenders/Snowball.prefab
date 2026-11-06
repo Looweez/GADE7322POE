@@ -591,6 +591,7 @@ MonoBehaviour:
   costMultiplierPerLevel: 20
   damageIncrease: 5
   healthIncrease: 25
+  upgradeVFXPrefab: {fileID: 1141732514499728567, guid: 73cdf5a13e65a09448a198a0f4949136, type: 3}
 --- !u!1 &6094200494478630672
 GameObject:
   m_ObjectHideFlags: 0

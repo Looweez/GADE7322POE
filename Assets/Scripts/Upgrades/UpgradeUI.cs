@@ -92,7 +92,7 @@ public class UpgradeUI : MonoBehaviour
         if (activeEntity != null)
         {
             activeEntity.UpgradeUnit();
-            UpdatePopupContent(); // Refresh UI to show new stats and next cost
+            UpdatePopupContent(); //refresh UI 
         }
     }
 }

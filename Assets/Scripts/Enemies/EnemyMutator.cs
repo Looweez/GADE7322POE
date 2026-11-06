@@ -28,8 +28,7 @@ public class EnemyMutator : MonoBehaviour
         enemyRenderer = GetComponentInChildren<Renderer>();
         pointLight = GetComponentInChildren<Light>();
 
-        // Ensure a point light exists as a child or component if needed, 
-        // or we can add one dynamically for the Bioluminescent mutation.
+        // ensure a point light exists as a child or component
         if (pointLight == null)
         {
             GameObject lightObj = new GameObject("MutationLight");
@@ -45,11 +44,11 @@ public class EnemyMutator : MonoBehaviour
 
     public void ApplyRandomMutation()
     {
-        // Randomly pick a mutation type (weighted or pure random)
+        // randomly pick  mutation type
         int roll = Random.Range(0, 6);
         activeMutation = (MutationType)roll;
 
-        // Apply stat and visual modifications based on the roll
+        // stat and visual modifications based on  roll
         switch (activeMutation)
         {
             case MutationType.Giant:
@@ -58,7 +57,7 @@ public class EnemyMutator : MonoBehaviour
                 {
                     enemyBase.EnemyMaxHealth *= 1.8f;
                     enemyBase.EnemyCurrentHealth = enemyBase.EnemyMaxHealth;
-                    enemyBase.speed *= 0.7f; // Slower
+                    enemyBase.speed *= 0.7f; //slower
                 }
                 break;
 
@@ -68,7 +67,7 @@ public class EnemyMutator : MonoBehaviour
                 {
                     enemyBase.EnemyMaxHealth *= 0.5f;
                     enemyBase.EnemyCurrentHealth = enemyBase.EnemyMaxHealth;
-                    enemyBase.speed *= 1.4f; // Faster
+                    enemyBase.speed *= 1.4f; //faster
                 }
                 break;
 
@@ -80,19 +79,18 @@ public class EnemyMutator : MonoBehaviour
                 if (pointLight != null)
                 {
                     pointLight.enabled = true;
-                    pointLight.color = Color.green; // Neon glow
+                    pointLight.color = Color.green; //glow
                 }
                 break;
 
             case MutationType.Enraged:
                 if (enemyRenderer != null)
                 {
-                    // Tint the material deep crimson red
+                    //tint  material  red
                     enemyRenderer.material.color = new Color(0.8f, 0.1f, 0.1f);
                 }
                 if (enemyBase != null)
                 {
-                    // If your EnemyBase handles tower attack damage, multiply it here:
                     enemyBase.attackDamage *= 1.5f; 
                 }
                 break;
@@ -100,7 +98,7 @@ public class EnemyMutator : MonoBehaviour
             case MutationType.Camouflage:
                 if (enemyRenderer != null)
                 {
-                    // Make material semi-translucent (Ensure your shader supports Transparency/Fade)
+                    //material semi-translucent
                     Color col = enemyRenderer.material.color;
                     col.a = 0.45f;
                     enemyRenderer.material.color = col;
@@ -109,14 +107,14 @@ public class EnemyMutator : MonoBehaviour
 
             case MutationType.Standard:
             default:
-                // Normal stats, no changes
+                //Normal stats no changes
                 break;
         }
 
-        Debug.Log($"Enemy spawned with mutation: {activeMutation}");
+        Debug.Log($"spawned with mutation: {activeMutation}");
     }
 
-    // Returns the adjusted point value for your PointPool system
+    //Returns the adjusted point value for PointPool system
     public int GetModifiedPointCost()
     {
         switch (activeMutation)

@@ -34,6 +34,8 @@ public class UpgradableEntity : MonoBehaviour
     {
         return currentLevel < maxLevel && CoinManager.Instance != null && CoinManager.Instance.CanAfford(GetUpgradeCost());
     }
+    
+    public GameObject upgradeVFXPrefab;
 
     public void UpgradeUnit()
     {
@@ -44,6 +46,13 @@ public class UpgradableEntity : MonoBehaviour
         {
             currentLevel++;
             ApplyStatUpgrades();
+
+            if (upgradeVFXPrefab != null)
+            {
+                GameObject vfxInstance = Instantiate(upgradeVFXPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
+                Destroy(vfxInstance, 2f); 
+            }
+
             Debug.Log($"{gameObject.name} upgraded to Level {currentLevel}!");
         }
     }

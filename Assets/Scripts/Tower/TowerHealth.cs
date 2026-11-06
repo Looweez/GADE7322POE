@@ -4,6 +4,8 @@ public class TowerHealth : MonoBehaviour
 {
     public float maxHealth = 100;
     public float currentHealth;
+    
+    public Material jamSplatterMaterial;
 
     void Start()
     {
@@ -24,9 +26,17 @@ public class TowerHealth : MonoBehaviour
     public void TakeDamage(float damageAmount) 
     {
         currentHealth -= damageAmount;
-        Debug.Log("Tower health:" + currentHealth);
-
     
+        // Calculate intensity based on missing health (e.g., 0 to 1)
+        float healthPercent = currentHealth / maxHealth;
+        float splatterIntensity = 1f - healthPercent; 
+
+        // Send the value to your JamSplatter shader material property
+        if (jamSplatterMaterial != null)
+        {
+            jamSplatterMaterial.SetFloat("_HealthIntensity", splatterIntensity); // Match your property name
+        }
+
         UIController.Instance?.UpdateTowerHealthText();
 
         if (currentHealth <= 0)
