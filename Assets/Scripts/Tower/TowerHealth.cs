@@ -43,6 +43,8 @@ public class TowerHealth : MonoBehaviour
         {
             DestroyTower();
         }
+        
+        TowerDamageFlash.TriggerFlash(); //evil screen space that i hate
     }
 
     public float GetCurrentHealthPercentage()
